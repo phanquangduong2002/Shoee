@@ -1,10 +1,10 @@
-package com.example.ttcm_webbangiay;
+package com.example.shoe_store;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class TtcmWebBanGiayApplicationTests {
+class ShoeStoreApplicationTests {
 
     @Test
     void contextLoads() {
