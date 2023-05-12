@@ -14,8 +14,6 @@ const Header = () => {
 
   const dispatch = useDispatch();
 
-  console.log(orders);
-
   const handleLogout = () => {
     setIsOpen(false);
     dispatch(logout());
