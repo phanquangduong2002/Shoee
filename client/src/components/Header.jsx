@@ -14,6 +14,8 @@ const Header = () => {
 
   const dispatch = useDispatch();
 
+  console.log(orders);
+
   const handleLogout = () => {
     setIsOpen(false);
     dispatch(logout());
@@ -76,7 +78,9 @@ const Header = () => {
               <CartIcon />
 
               <span className="flex items-center justify-center absolute top-[-8px] right-[-6px] bg-primaryColor h-[20px] w-[20px] rounded-full text-white text-sm">
-                {orders?.orderDetailsByOrderId?.length}
+                {orders && orders.length === 0
+                  ? orders.length
+                  : orders?.orderDetailsByOrderId?.length}
               </span>
             </Link>
           </div>
