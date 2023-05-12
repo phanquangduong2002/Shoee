@@ -30,12 +30,19 @@ const Orders = () => {
     const fetchData = async () => {
       if (user) {
         let ordersDetail = [];
-        await Promise.all(
-          orders.orderDetailsByOrderId.map(async (item) => {
-            const product = await axios.get(`${url}/product/${item.productId}`);
-            ordersDetail = ordersDetail.concat(product.data);
-          })
-        );
+        if (
+          orders?.orderDetailsByOrderId !== undefined &&
+          orders?.orderDetailsByOrderId[Symbol.iterator]
+        ) {
+          await Promise.all(
+            orders?.orderDetailsByOrderId.map(async (item) => {
+              const product = await axios.get(
+                `${url}/product/${item.productId}`
+              );
+              ordersDetail = ordersDetail.concat(product.data);
+            })
+          );
+        }
 
         dispatch(addOrdersDetail(ordersDetail));
       }
@@ -47,7 +54,7 @@ const Orders = () => {
   return (
     <div className="relative mt-[100px]">
       <div className="px-10 min-h-[40vh]">
-        {orders && orders?.orderDetailsByOrderId?.length === 0 ? (
+        {ordersDetail && ordersDetail.length === 0 ? (
           <div className="py-4 flex flex-col items-center justify-center">
             <div className="w-full py-4 flex flex-row items-center justify-center bg-red-200">
               <div className="text-textColor font-medium pr-6">
@@ -66,7 +73,7 @@ const Orders = () => {
             <div className="w-full py-4 flex flex-row items-center justify-center bg-red-200">
               <div className="text-textColor font-medium pr-6">
                 Số lượng trong giỏ hàng
-                <span> ({orders?.orderDetailsByOrderId?.length})</span>
+                <span> ({ordersDetail?.length})</span>
               </div>
             </div>
             <ul className="w-full">

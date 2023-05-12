@@ -10,9 +10,11 @@ import { UserIcon, CartIcon, LogoutIcon, AddIcon } from "../assets";
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { user } = useSelector((state) => state.user);
-  const { orders } = useSelector((state) => state.order);
+  const { orders, ordersDetail } = useSelector((state) => state.order);
 
   const dispatch = useDispatch();
+
+  console.log(orders);
 
   const handleLogout = () => {
     setIsOpen(false);
