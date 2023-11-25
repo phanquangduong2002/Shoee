@@ -24,7 +24,7 @@ import org.springframework.http.HttpStatus;
 
 @RestController
 @RequestMapping("/api/order")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://127.0.0.1:5500")
 public class OrderController {
     @Autowired
     OrderDetailService orderDetailService;
@@ -41,7 +41,7 @@ public class OrderController {
         return ResponseEntity.ok().body(order);
     }
 
-    @PostMapping("/{customerId}/products")
+    @PostMapping("/{customerId}")
     public ResponseEntity<?> addProductToOrder(@PathVariable int customerId,
             @RequestBody Map<String, Integer> productInfo) {
         int productId = productInfo.get("productId");

@@ -1,7 +1,6 @@
 package com.example.shoe_store.entity;
 
 import javax.persistence.*;
-import java.sql.Date;
 import java.util.Collection;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonManagedReference;

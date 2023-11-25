@@ -15,12 +15,11 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 
 import org.springframework.http.HttpStatus;
 
-import java.util.List;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://127.0.0.1:5500")
 public class CustomerController {
     @Autowired
     CustomerService customerService;
@@ -42,16 +41,23 @@ public class CustomerController {
         return ResponseEntity.ok().body(storedUser);
     }
 
-    @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody CustomerEntity user) {
+    @PostMapping("/signup")
+    public ResponseEntity<?> register(@RequestBody Map<String, Object> requestBody) {
 
-        CustomerEntity storedUser = customerService.getCustomer(user.getUserName());
+        String userName = (String) requestBody.get("userName");
+        String password = (String) requestBody.get("password");
+
+        CustomerEntity storedUser = customerService.getCustomer(userName);
 
         if (storedUser != null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User already exist.");
         } else {
-            customerService.createCustomer(user);
-            return ResponseEntity.ok().body(user);
+            CustomerEntity newUser = new CustomerEntity();
+            newUser.setUserName(userName);
+            newUser.setPassword(password);
+            newUser.setIsAdmin(false);
+            customerService.createCustomer(newUser);
+            return ResponseEntity.ok().body(newUser);
         }
     }
 }

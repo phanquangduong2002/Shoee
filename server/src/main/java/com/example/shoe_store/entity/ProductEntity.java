@@ -1,7 +1,6 @@
 package com.example.shoe_store.entity;
 
 import javax.persistence.*;
-import java.sql.Date;
 import java.util.Collection;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -71,7 +70,6 @@ public class ProductEntity {
                 && Objects.equals(productPrice, that.productPrice);
     }
 
-    @Override
     public int hashCode() {
         return Objects.hash(productId, productName, productImage, productPrice);
     }
